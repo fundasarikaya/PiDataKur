@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>PiData | @ViewBag.Title</title>
+    <link rel="shortcut icon" href="~/Content/favicon.ico" type="image/x-icon" />
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.21/b-1.6.2/b-colvis-1.6.2/b-html5-1.6.2/b-print-1.6.2/cr-1.5.2/r-2.2.4/sc-2.0.2/sp-1.1.0/datatables.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <link href="~/Content/Layout/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/Layout/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/Layout/css/ionicons.min.css" rel="stylesheet" />
+    <link href="~/Content/Layout/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+    <link href="~/Content/Layout/css/AdminLTE.min.css" rel="stylesheet" />
+    <link href="~/Content/Layout/css/_all-skins.min.css" rel="stylesheet" />
+    <link href="~/Content/Layout/css/Style.css" rel="stylesheet" />
+    <link href="~/Content/Layout/css/morris.css" rel="stylesheet" />
+    <link href="~/Content/Layout/css/dropzone.css" rel="stylesheet" />
+    <link href="~/Content/Layout/css/alertify.min.css" rel="stylesheet" />
+    <link href="~/Content/Layout/css/select2.min.css" rel="stylesheet" />
+    <link href="~/Content/CariKart/css/style.css" rel="stylesheet" />
+    <script src="~/Content/jquery-3.5.0.min.js"></script>
+
+</head>
+<body class="hold-transition skin-blue sidebar-mini" id="body">
+    <div class="wrapper">
+        <header class="main-header">
+            <a href="~/Home/Index" class="logo">
+                <span class="logo-mini"><b>[Pi]</b>Data</span>
+                <span class="logo-lg"><b>[Pi]</b>Data</span>
+            </a>
+            <nav class="navbar navbar-static-top">
+                <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="@Url.Content("~/Content/user2-160x160.jpg")" class="user-image" alt="User Image">
+                                <span class="hidden-xs">
+                                    @*@if (Session["KullaniciAdi"] != null)
+                                        {@Session["KullaniciAdi"]}*@
+                                    @if (TempData["message"] != null)
+                                    {
+                                        <div class="alert alert-info">@TempData["message"]</div>
+                                    }
+                                </span>
+                                <small>
+                                    @*@if (Session["SonGirisTarihi"] != null)
+                                        {@Session["SonGirisTarihi"]}*@
+                                </small>
+                            </a>
+                            @*@await Component.InvokeAsync("UserSummary")*@
+                        </li>
+
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <aside class="main-sidebar">
+            <section class="sidebar">
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <img src="@Url.Content("~/Content/user2-160x160.jpg")" class="img-circle" alt="User Image">
+                    </div>
+                    <div class="pull-left info">
+                        <p>
+                            @*@if (Session["KullaniciAdi"] != null)
+                                {@Session["KullaniciAdi"]}*@
+                        </p>
+                    </div>
+                </div>
+                <ul class="sidebar-menu" data-widget="tree">
+                    <li class="header">MENU</li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-share"></i> <span>Genel Ayarlar</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-circle-o"></i> Kur Bilgileri
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a asp-controller="Currency" asp-action="Currency"><i class="fa fa-circle-o"></i>Para Birimi</a></li>
+                                    <li><a asp-controller="Currency" asp-action="CurrencyList"><i class="fa fa-circle-o"></i>Günlük Kur</a></li>
+                                    <li><a asp-controller="Currency" asp-action="AlisSatisHesaplama"><i class="fa fa-circle-o"></i>Alış/Satış Hesaplama</a></li>
+                                    <li><a asp-controller="Currency" asp-action="KurGrafigi"><i class="fa fa-circle-o"></i>Günlük Kur Grafiği</a></li>
+
+                                </ul>
+                            </li>
+                        </ul>
+                </ul>
+            </section>
+
+        </aside>
+        <div class="content-wrapper">
+            @RenderBody()
+        </div>
+        <footer class="main-footer">
+            <div class="pull-right hidden-xs">
+                <b>Version</b> 1.0.0
+            </div>
+            <strong>Copyright &copy; 2020 <a href="#">Pidata </a>.</strong> All rights
+            reserved.
+        </footer>
+        <div class="control-sidebar-bg"></div>
+    </div>
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+            integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+            crossorigin="anonymous"></script>
+    <script src="~/Content/Layout/js/bootstrap.min.js"></script>
+    <script src="~/Content/Layout/js/jquery.slimscroll.min.js"></script>
+    <script src="~/Content/Layout/js/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Content/Layout/js/fastclick.js"></script>
+    <script src="~/Content/Layout/js/jquery.inputmask.js"></script>
+    <script src="~/Content/Layout/js/jquery.inputmask.date.extensions.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.21/b-1.6.2/b-colvis-1.6.2/b-html5-1.6.2/b-print-1.6.2/cr-1.5.2/r-2.2.4/sc-2.0.2/sp-1.1.0/datatables.min.js"></script>
+    <script src="~/Content/Layout/js/moment.js"></script>
+    <script src="~/Content/Layout/js/tr.js"></script>
+    <script src="~/Content/Layout/js/daterangepicker.js"></script>
+    <script src="~/Content/Layout/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/Content/Layout/js/dropzone.js"></script>
+    <script src="~/Content/Layout/js/Chart.js"></script>
+    <script src="~/Content/Layout/js/raphael.min.js"></script>
+    <script src="~/Content/Layout/js/morris.min.js"></script>
+    <script src="~/Content/Layout/js/demo.js"></script>
+    <script src="~/Content/Layout/js/adminlte.min.js"></script>
+    <script src="~/Content/Layout/js/alertify.min.js"></script>
+    <script src="~/Content/Layout/js/select2.full.min.js"></script>
+    <script src="~/Content/KayitEkleKaydet.js"></script>
+    <script src="~/Content/AlanYerlestir.js"></script>
+    <script src="~/Content/Layout/js/icheck.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.sidebar-menu').tree()
+        })
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            $('.select2').select2();
+        });
+    </script>
+    <script>
+        //datepicker
+        $(function () {
+            $('#datepicker').datepicker({
+                autoclose: true,
+                format: "dd/mm/yyyy",
+                language: 'tr'
+            }
+            );
+            $('#datepicker2').datepicker({
+                autoclose: true,
+                format: "dd/mm/yyyy",
+                language: 'tr'
+            }
+            );
+        })
+    </script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
+

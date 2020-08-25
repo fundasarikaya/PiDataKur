@@ -1,0 +1,40 @@
+﻿@model PiData.WebUI.Business.Common.CurrencyDTO
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Para Birimi</h3>
+                </div>
+                <form role="form" asp-controller="Currency" asp-action="CurrencyAdd">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Para Birimi</label>
+                            <input type="text" name="Currency" class="form-control" id="Currency" placeholder="Para Birimi">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Para Birimi Kodu</label>
+                            <input type="text" name="CurrencyCode" class="form-control" id="CurrencyCode" placeholder="Para Birimi Kodu">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Ülke</label>
+                            <input type="text" class="form-control" name="Country" id="Country" placeholder="Ülke">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Açıklama</label>
+                            <textarea class="form-control" name="Description" id="Description"></textarea>
+                        </div>
+
+                    </div>
+
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-primary">Kaydet</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

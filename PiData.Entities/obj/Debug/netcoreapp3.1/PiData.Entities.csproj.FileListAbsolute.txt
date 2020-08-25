@@ -1,0 +1,12 @@
+C:\Users\funda\Desktop\PiData.Proje\PiData.Entities\bin\Debug\netcoreapp3.1\PiData.Entities.deps.json
+C:\Users\funda\Desktop\PiData.Proje\PiData.Entities\bin\Debug\netcoreapp3.1\PiData.Entities.dll
+C:\Users\funda\Desktop\PiData.Proje\PiData.Entities\bin\Debug\netcoreapp3.1\PiData.Entities.pdb
+C:\Users\funda\Desktop\PiData.Proje\PiData.Entities\bin\Debug\netcoreapp3.1\PiData.Core.dll
+C:\Users\funda\Desktop\PiData.Proje\PiData.Entities\bin\Debug\netcoreapp3.1\PiData.Core.pdb
+C:\Users\funda\Desktop\PiData.Proje\PiData.Entities\obj\Debug\netcoreapp3.1\PiData.Entities.csprojAssemblyReference.cache
+C:\Users\funda\Desktop\PiData.Proje\PiData.Entities\obj\Debug\netcoreapp3.1\PiData.Entities.AssemblyInfoInputs.cache
+C:\Users\funda\Desktop\PiData.Proje\PiData.Entities\obj\Debug\netcoreapp3.1\PiData.Entities.AssemblyInfo.cs
+C:\Users\funda\Desktop\PiData.Proje\PiData.Entities\obj\Debug\netcoreapp3.1\PiData.Entities.csproj.CoreCompileInputs.cache
+C:\Users\funda\Desktop\PiData.Proje\PiData.Entities\obj\Debug\netcoreapp3.1\PiData.Entities.csproj.CopyComplete
+C:\Users\funda\Desktop\PiData.Proje\PiData.Entities\obj\Debug\netcoreapp3.1\PiData.Entities.dll
+C:\Users\funda\Desktop\PiData.Proje\PiData.Entities\obj\Debug\netcoreapp3.1\PiData.Entities.pdb

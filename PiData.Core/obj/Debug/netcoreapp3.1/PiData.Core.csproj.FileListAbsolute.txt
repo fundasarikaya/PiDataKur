@@ -1,0 +1,8 @@
+C:\Users\funda\Desktop\PiData.Proje\PiData.Core\bin\Debug\netcoreapp3.1\PiData.Core.deps.json
+C:\Users\funda\Desktop\PiData.Proje\PiData.Core\bin\Debug\netcoreapp3.1\PiData.Core.dll
+C:\Users\funda\Desktop\PiData.Proje\PiData.Core\bin\Debug\netcoreapp3.1\PiData.Core.pdb
+C:\Users\funda\Desktop\PiData.Proje\PiData.Core\obj\Debug\netcoreapp3.1\PiData.Core.AssemblyInfoInputs.cache
+C:\Users\funda\Desktop\PiData.Proje\PiData.Core\obj\Debug\netcoreapp3.1\PiData.Core.AssemblyInfo.cs
+C:\Users\funda\Desktop\PiData.Proje\PiData.Core\obj\Debug\netcoreapp3.1\PiData.Core.csproj.CoreCompileInputs.cache
+C:\Users\funda\Desktop\PiData.Proje\PiData.Core\obj\Debug\netcoreapp3.1\PiData.Core.dll
+C:\Users\funda\Desktop\PiData.Proje\PiData.Core\obj\Debug\netcoreapp3.1\PiData.Core.pdb
