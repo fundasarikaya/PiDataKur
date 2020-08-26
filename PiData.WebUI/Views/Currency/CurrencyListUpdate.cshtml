@@ -36,6 +36,7 @@
                     <div class="form-group">
                         <label>Para Birimi</label>
                         <select class="form-control select2" style="width: 100%;" id="parabirimleri">
+                            <option value="all" class="option">Tümü</option>
                             @foreach (var item in Model.Currencies)
                             {
                                 <option value="@item.Currency" class="option">@item.Currency</option>
@@ -64,22 +65,18 @@
 <script>
     $(document).ready(function () {
         $('#Guncelle').click(function () {
-
             $("#GunlukKurList").empty();
             var url = '@Url.Action("GetCurrencyListUpdate", "Currency")';
             var baslangicTarihi = $('#datepicker').val();
             var bitisTarihi = $('#datepicker2').val();
             var CurrencyName = $('#parabirimleri').children("option:selected").val();
-            //var ExchangeListDTO = new Object();
-            //ExchangeListDTO.startDate = baslangicTarihi;
-            //ExchangeListDTO.endDate = bitisTarihi;
+            
             
             $.ajax({
                 type: "GET",
                 url: url,
                 data: { startDateP: baslangicTarihi, endDateP: bitisTarihi, currencyP: CurrencyName },
                 success: function (result) {
-                    debugger;
                     $("#GunlukKurList").html(result);
                 },
             });

@@ -23,21 +23,29 @@ namespace PiData.Business.Concrete
             _mapper = mapper;
             _currencyDal = currencyDal;
         }
-        public List<ExchangeListDTO> GetServiceExchangeList(string startDate, string endDate, string currency)
+
+        public List<ExchangeListDTO> GetCurrencyRateList(string currency)
         {
             List<CurrencyInfo> currencies = _currencyDal.GetList();
-            List<string> parabirimleri = new List<string> { "EUR", "USD" }; // Veritabanından gelecek
+            List<string> parabirimleri = new List<string>();
+            string[] a = currency.Split(",");
+            foreach (var item in a)
+            {
+                parabirimleri.Add(item);
+            }
 
             List<string> birimler = new List<string>();
-            parabirimleri.ForEach(p =>
-            {
-                birimler.Add($"TP.DK.{p}.A");
-                birimler.Add($"TP.DK.{p}.S");
-            });
-            string birimlink = string.Join('-', birimler.ToArray());
+            string birimlink = "";
 
+            parabirimleri.ForEach(p =>
+                {
+                    birimler.Add($"TP.DK.{p}.A");
+                    birimler.Add($"TP.DK.{p}.S");
+                });
+
+            birimlink = string.Join('-', birimler.ToArray());
             WebClient client = new WebClient();
-            var url = $"https://evds2.tcmb.gov.tr/service/evds/series=" + birimlink + "&startDate=" + startDate + "&endDate=" + endDate + "&type=json&key=mDCZlAC7EA";
+            var url = $"https://evds2.tcmb.gov.tr/service/evds/series=" + birimlink + "&startDate=" + DateTime.Now.ToString("dd-MM-yyyy") + "&endDate=" + DateTime.Now.ToString("dd-MM-yyyy") + "&type=json&key=mDCZlAC7EA";
             var jsonData = client.DownloadString(url);
             var currencyjson = JsonConvert.DeserializeObject<dynamic>(jsonData);
 
@@ -48,8 +56,8 @@ namespace PiData.Business.Concrete
                 {
                     foreach (var item in currencyjson.items)
                     {
-                        string Satis = item[$"TP_DK_{p}_S"];
-                        string Alis = item[$"TP_DK_{p}_A"];
+                        decimal Satis = item[$"TP_DK_{p}_S"];//p.Currency
+                        decimal Alis = item[$"TP_DK_{p}_A"];
                         ExchangeListDTO kurrow = new ExchangeListDTO
                         {
                             Date = item["Tarih"],
@@ -57,9 +65,9 @@ namespace PiData.Business.Concrete
                         };
                         decimal ForexSelling = 0;
                         decimal ForexBuying = 0;
-                        if (!string.IsNullOrEmpty(Satis) && decimal.TryParse(Satis, out ForexSelling))
+                        if (!Satis.Equals(null) && decimal.TryParse(Satis.ToString(), out ForexSelling))
                             kurrow.ForexSelling = ForexSelling;
-                        if (!string.IsNullOrEmpty(Alis) && decimal.TryParse(Alis, out ForexBuying))
+                        if (!Alis.Equals(null) && decimal.TryParse(Alis.ToString(), out ForexBuying))
                             kurrow.ForexBuying = ForexBuying;
 
                         records.Add(kurrow);
@@ -67,9 +75,161 @@ namespace PiData.Business.Concrete
 
                 });
             }
-            var getList = records;
-            var maplist = _mapper.Map<List<ExchangeListDTO>>(getList);
-            return maplist;
+
+            
+
+            return records;
+        }
+
+        public List<ExchangeListDTO> GetServiceExchangeList(string startDate, string endDate, string currency)
+        {
+            List<CurrencyInfo> currencies = _currencyDal.GetList();
+
+            List<string> birimler = new List<string>();
+            string birimlink = "";
+            if (currency != "all")
+            {
+                List<CurrencyInfo> list = currencies.Where(x => x.Currency == currency).ToList();
+                list.ForEach(p =>
+                {
+                    birimler.Add($"TP.DK.{p.Currency}.A");
+                    birimler.Add($"TP.DK.{p.Currency}.S");
+                });
+            }
+            else
+            {
+                currencies.ForEach(p =>
+                {
+                    birimler.Add($"TP.DK.{p.Currency}.A");
+                    birimler.Add($"TP.DK.{p.Currency}.S");//her para birimi icin p.currency
+                });
+            }
+            birimlink = string.Join('-', birimler.ToArray());
+            WebClient client = new WebClient();
+            var url = $"https://evds2.tcmb.gov.tr/service/evds/series=" + birimlink + "&startDate=" + startDate + "&endDate=" + endDate + "&type=json&key=mDCZlAC7EA";
+            var jsonData = client.DownloadString(url);
+            var currencyjson = JsonConvert.DeserializeObject<dynamic>(jsonData);
+
+            List<ExchangeListDTO> records = new List<ExchangeListDTO>();
+            if (currencyjson != null && currencyjson.items != null)
+            {
+                currencies.ForEach(p =>
+                {
+                    foreach (var item in currencyjson.items)
+                    {
+                        var satiskey = currency != "all" ? item[$"TP_DK_{currency}_S"] : item[$"TP_DK_{p.Currency}_S"];
+                        var aliskey = currency != "all" ? item[$"TP_DK_{currency}_A"] : item[$"TP_DK_{p.Currency}_A"];
+                        decimal Satis = (satiskey) == null ? 0 : (satiskey);//p.Currency
+                        decimal Alis = (aliskey) == null ? 0 : (aliskey);
+                        ExchangeListDTO kurrow = new ExchangeListDTO
+                        {
+                            Date = item["Tarih"],
+                            CurrencyName = currency != "all" ? currency : p.Currency
+                        };
+                        decimal ForexSelling = 0;
+                        decimal ForexBuying = 0;
+                        if (!Satis.Equals(null) && decimal.TryParse(Satis.ToString(), out ForexSelling))
+                            kurrow.ForexSelling = ForexSelling;
+                        if (!Alis.Equals(null) && decimal.TryParse(Alis.ToString(), out ForexBuying))
+                            kurrow.ForexBuying = ForexBuying;
+
+                        records.Add(kurrow);
+
+                        var entity = kurrow;
+                        var model = new CurrencyList()
+                        {
+                            CurrencyName = kurrow.CurrencyName,
+                            Date = item["Tarih"],
+                            ForexBuying=ForexBuying,
+                            ForexSelling=ForexSelling
+                        };
+                      
+
+                        DateTime? dt = null;
+                        if (item["Tarih"] != null)
+                        {
+                            dt = Convert.ToDateTime(item["Tarih"]);
+                        }
+
+                        var list = _currencyListDal.GetList(x => x.CurrencyName == kurrow.CurrencyName && x.Date == dt);
+
+                        //_currencyListDal.DeleteRange(list);
+
+                        list.ForEach(d => _currencyListDal.Delete(d));
+                        _currencyListDal.Add(model);
+                        
+
+                    }
+
+                });
+            }
+
+            return records;
+        }
+
+        public List<ExchangeListDTO> GetExchangeGraphicList(string startDate, string endDate, string currency)
+        {
+            List<CurrencyInfo> currencies = _currencyDal.GetList();
+
+            List<string> birimler = new List<string>();
+            string birimlink = "";
+            if (currency != "all")
+            {
+                List<CurrencyInfo> list = currencies.Where(x => x.Currency == currency).ToList();
+                list.ForEach(p =>
+                {
+                    birimler.Add($"TP.DK.{p.Currency}.A");
+                    birimler.Add($"TP.DK.{p.Currency}.S");
+                });
+            }
+            else
+            {
+                currencies.ForEach(p =>
+                {
+                    birimler.Add($"TP.DK.{p.Currency}.A");
+                    birimler.Add($"TP.DK.{p.Currency}.S");//her para birimi icin p.currency
+                });
+            }
+            birimlink = string.Join('-', birimler.ToArray());
+            WebClient client = new WebClient();
+            var url = $"https://evds2.tcmb.gov.tr/service/evds/series=" + birimlink + "&startDate=" + startDate + "&endDate=" + endDate + "&type=json&key=mDCZlAC7EA";
+            var jsonData = client.DownloadString(url);
+            var currencyjson = JsonConvert.DeserializeObject<dynamic>(jsonData);
+
+            List<ExchangeListDTO> records = new List<ExchangeListDTO>();
+            if (currencyjson != null && currencyjson.items != null)
+            {
+                currencies.ForEach(p =>
+                {
+                    foreach (var item in currencyjson.items)
+                    {
+                        var satiskey = currency != "all" ? item[$"TP_DK_{currency}_S"] : item[$"TP_DK_{p.Currency}_S"];
+                        var aliskey = currency != "all" ? item[$"TP_DK_{currency}_A"] : item[$"TP_DK_{p.Currency}_A"];
+                        decimal Satis = (satiskey) == null ? 0 : (satiskey);//p.Currency
+                        decimal Alis = (aliskey) == null ? 0 : (aliskey);
+                        ExchangeListDTO kurrow = new ExchangeListDTO
+                        {
+                            Date = item["Tarih"],
+                            CurrencyName = currency != "all" ? currency : p.Currency
+                        };
+                        decimal ForexSelling = 0;
+                        decimal ForexBuying = 0;
+                        if (!Satis.Equals(null) && decimal.TryParse(Satis.ToString(), out ForexSelling))
+                            kurrow.ForexSelling = ForexSelling;
+                        if (!Alis.Equals(null) && decimal.TryParse(Alis.ToString(), out ForexBuying))
+                            kurrow.ForexBuying = ForexBuying;
+
+                        records.Add(kurrow);
+
+                        var entity = kurrow;
+                        var mapp = _mapper.Map<ExchangeListDTO, CurrencyListDTO>(kurrow);
+                        var a = _mapper.Map<CurrencyListDTO, CurrencyList>(mapp);
+                    }
+
+                });
+            }
+
+            return records;
         }
     }
 }

@@ -14,6 +14,8 @@ namespace PiData.Business.Mapper
         {
             CreateMap<CurrencyDTO, CurrencyInfo>().ReverseMap();
             CreateMap<ExchangeListDTO, CurrencyList>().ReverseMap();
+            CreateMap<ExchangeListDTO, CurrencyListDTO>().ReverseMap();
+            CreateMap<CurrencyListDTO, CurrencyList>().ReverseMap();
         }
     }
 }

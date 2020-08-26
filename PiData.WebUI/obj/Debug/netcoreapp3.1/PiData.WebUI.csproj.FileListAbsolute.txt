@@ -91,3 +91,7 @@ C:\Users\funda\Desktop\PiData.Proje\PiData.WebUI\obj\Debug\netcoreapp3.1\staticw
 C:\Users\funda\Desktop\PiData.Proje\PiData.WebUI\obj\Debug\netcoreapp3.1\PiData.WebUI.genruntimeconfig.cache
 C:\Users\funda\Desktop\PiData.Proje\PiData.WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Currency\CurrencyListUpdate.cshtml.g.cs
 C:\Users\funda\Desktop\PiData.Proje\PiData.WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\CurrencyListUpdate\Default.cshtml.g.cs
+C:\Users\funda\Desktop\PiData.Proje\PiData.WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Currency\CurrencyRateList.cshtml.g.cs
+C:\Users\funda\Desktop\PiData.Proje\PiData.WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\CurrencyRateList\Default.cshtml.g.cs
+C:\Users\funda\Desktop\PiData.Proje\PiData.WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Currency\Graphic.cshtml.g.cs
+C:\Users\funda\Desktop\PiData.Proje\PiData.WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\CurrencyGraphic\Defatult.cshtml.g.cs

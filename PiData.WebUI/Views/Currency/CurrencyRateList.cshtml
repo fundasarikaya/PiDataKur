@@ -1,0 +1,67 @@
+﻿@model PiData.Business.Common.ExchangeListDTO
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>Para Birimi</label>
+                <select class="form-control select2" multiple="multiple" data-placeholder="Para Birimi"
+                        style="width: 100%;" id="multicurrencies">
+                    @foreach (var item in Model.Currencies)
+                    {
+                        <option value="@item.Currency" class="option">@item.Currency</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Güncel Kurlar</h3>
+                    <a href="#" class="btn btn-success pull-right" id="ListeleCurrency">Listele</a>
+                </div>
+
+                <div class="box-body table-responsive no-padding">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <br />
+                           
+                        </div>
+                    </div>
+                </div>
+                <div id="CurrencyRateList">
+              
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</section>
+<script>
+    $(document).ready(function () {
+        $('#ListeleCurrency').click(function () {
+            $("#CurrencyRateList").empty();
+            var url = '@Url.Action("GetCurrencyRateList", "Currency")';
+
+            var currencyP = new Array();
+            var index = 0;
+            $('#multicurrencies :selected').each(function () {
+                currencyP.push($(this).text());
+                //currencyP[index] = $(this).text();
+                //index++;
+            });
+            
+            $.ajax({
+                type: "GET",
+                url: url,
+                data: { currencyP: currencyP.toString() },
+                success: function (data) {
+                    console.log(data);
+                    $("#CurrencyRateList").html(data);
+                },
+            });
+        })
+    })
+</script>

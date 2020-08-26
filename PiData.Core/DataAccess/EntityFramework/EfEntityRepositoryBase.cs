@@ -32,6 +32,8 @@ namespace PiData.Core.DataAccess.EntityFramework
             }
         }
 
+      
+
         public TEntity Get(Expression<Func<TEntity, bool>> filter)
         {
             using (var context = new TContext())
