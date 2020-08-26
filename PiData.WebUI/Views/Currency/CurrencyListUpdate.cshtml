@@ -1,0 +1,88 @@
+﻿@model PiData.Business.Common.ExchangeListDTO
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="content">
+    <div class="col-md-12">
+        <div class="box box-primary">
+            <div class="box-header">
+                <h3 class="box-title">Kur Bilgileri Güncelle</h3>
+            </div>
+            <div class="box-body">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Başlangıç Tarihi:</label>
+
+                        <div class="input-group date">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="text" class="form-control pull-right" id="datepicker" name="baslangicTarihi" placeholder="Başlangıç Tarihi">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Bitiş Tarihi:</label>
+                        <div class="input-group date">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="text" class="form-control pull-right" id="datepicker2" placeholder="Bitiş Tarihi">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Para Birimi</label>
+                        <select class="form-control select2" style="width: 100%;" id="parabirimleri">
+                            @foreach (var item in Model.Currencies)
+                            {
+                                <option value="@item.Currency" class="option">@item.Currency</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <br />
+                        <a href="#" class="btn btn-success" id="Guncelle">Güncelle</a>
+                    </div>
+                </div>
+
+            </div>
+           
+            <div id="GunlukKurList">
+
+            </div>
+        </div>
+        <div>
+
+        </div>
+    </div>
+</section>
+<script>
+    $(document).ready(function () {
+        $('#Guncelle').click(function () {
+
+            $("#GunlukKurList").empty();
+            var url = '@Url.Action("GetCurrencyListUpdate", "Currency")';
+            var baslangicTarihi = $('#datepicker').val();
+            var bitisTarihi = $('#datepicker2').val();
+            var CurrencyName = $('#parabirimleri').children("option:selected").val();
+            //var ExchangeListDTO = new Object();
+            //ExchangeListDTO.startDate = baslangicTarihi;
+            //ExchangeListDTO.endDate = bitisTarihi;
+            
+            $.ajax({
+                type: "GET",
+                url: url,
+                data: { startDateP: baslangicTarihi, endDateP: bitisTarihi, currencyP: CurrencyName },
+                success: function (result) {
+                    debugger;
+                    $("#GunlukKurList").html(result);
+                },
+            });
+        })
+    })
+</script>

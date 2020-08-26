@@ -8,10 +8,8 @@ C:\Users\funda\Desktop\PiData.Proje\PiData.WebUI\obj\Debug\netcoreapp3.1\PiData.
 C:\Users\funda\Desktop\PiData.Proje\PiData.WebUI\obj\Debug\netcoreapp3.1\PiData.WebUI.TagHelpers.input.cache
 C:\Users\funda\Desktop\PiData.Proje\PiData.WebUI\obj\Debug\netcoreapp3.1\PiData.WebUI.TagHelpers.output.cache
 C:\Users\funda\Desktop\PiData.Proje\PiData.WebUI\obj\Debug\netcoreapp3.1\PiData.WebUI.RazorCoreGenerate.cache
-C:\Users\funda\Desktop\PiData.Proje\PiData.WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Components\CurrencyList\Default.cshtml.g.cs
 C:\Users\funda\Desktop\PiData.Proje\PiData.WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Currency\Currency.cshtml.g.cs
 C:\Users\funda\Desktop\PiData.Proje\PiData.WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Currency\CurrencyAdd.cshtml.g.cs
-C:\Users\funda\Desktop\PiData.Proje\PiData.WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Currency\CurrencyList.cshtml.g.cs
 C:\Users\funda\Desktop\PiData.Proje\PiData.WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
 C:\Users\funda\Desktop\PiData.Proje\PiData.WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
 C:\Users\funda\Desktop\PiData.Proje\PiData.WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
@@ -91,3 +89,5 @@ C:\Users\funda\Desktop\PiData.Proje\PiData.WebUI\obj\Debug\netcoreapp3.1\PiData.
 C:\Users\funda\Desktop\PiData.Proje\PiData.WebUI\obj\Debug\netcoreapp3.1\staticwebassets\PiData.WebUI.StaticWebAssets.Manifest.cache
 C:\Users\funda\Desktop\PiData.Proje\PiData.WebUI\obj\Debug\netcoreapp3.1\staticwebassets\PiData.WebUI.StaticWebAssets.xml
 C:\Users\funda\Desktop\PiData.Proje\PiData.WebUI\obj\Debug\netcoreapp3.1\PiData.WebUI.genruntimeconfig.cache
+C:\Users\funda\Desktop\PiData.Proje\PiData.WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Currency\CurrencyListUpdate.cshtml.g.cs
+C:\Users\funda\Desktop\PiData.Proje\PiData.WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\CurrencyListUpdate\Default.cshtml.g.cs

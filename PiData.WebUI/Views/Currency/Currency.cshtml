@@ -1,4 +1,4 @@
-﻿@model PiData.WebUI.Business.Common.CurrencyDTO
+﻿@model PiData.Business.Common.CurrencyDTO
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -25,7 +25,6 @@
                             <th>Para Birimi</th>
                             <th>Ulke</th>
                             <th>Açıklama</th>
-                            <th>Kod</th>
                         </tr>
 
 
@@ -36,7 +35,6 @@
                                 <td>@currency.Currency</td>
                                 <td>@currency.Country</td>
                                 <td>@currency.Description</td>
-                                <td>@currency.CurrencyCode</td>
                             </tr>
                         }
                     </table>

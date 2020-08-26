@@ -21,6 +21,8 @@ namespace PiData.WebUI.Controllers
             _currencyService = currencyService;
             _exchangeListService = exchangeListService;
         }
+
+        #region Para birimi tanımlama ekranı
         public IActionResult Currency()
         {
             CurrencyDTO currencyDTO = new CurrencyDTO
@@ -44,37 +46,42 @@ namespace PiData.WebUI.Controllers
             return RedirectToAction("CurrencyAdd");
         }
         #endregion
+        #endregion
 
         public IActionResult CurrencyListUpdate()
         {
-            return View();
+            ExchangeListDTO exchangeList = new ExchangeListDTO
+            {
+                Currencies = _currencyService.GetAll()
+            };
+            return View(exchangeList);
         }
-
-        public IActionResult CurrencyList(ExchangeListDTO model)
+     
+        public IActionResult GetCurrencyListUpdate(string startDateP ,string endDateP, string currencyP)
         {
-            var startDate = model.startDate == null ? DateTime.Now.ToString("dd-MM-yyyy") : Convert.ToDateTime(model.startDate).ToString("dd-MM-yyyy");
-            var endDate = model.endDate == null ? DateTime.Now.ToString("dd-MM-yyyy") : Convert.ToDateTime(model.endDate).ToString("dd-MM-yyyy");
-            var currency = model.CurrencyName == null ? "TP_DK_USD_S" : model.CurrencyName;           
+            var startDate = startDateP == null ? DateTime.Now.ToString("dd-MM-yyyy") : Convert.ToDateTime(startDateP).ToString("dd-MM-yyyy");
+            var endDate = endDateP == null ? DateTime.Now.ToString("dd-MM-yyyy") : Convert.ToDateTime(endDateP).ToString("dd-MM-yyyy");
+            var currency = currencyP == null ? "TP_DK_USD_S" : currencyP;
 
-            List<ExchangeListDTO> exchangeLists = _exchangeListService.GetServiceExchangeList(startDate,endDate,currency);//Kur bilgileri güncelleme ekranı 
-            return View(exchangeLists);
+           
+            return ViewComponent("CurrencyListUpdate", new { startDate = startDate, endDate= endDate, currency = currency });
         }
     }
 }
 
- /*
-            
-                BLL
-                public  List<KurListesiDTO> GetServisKurListesi(BaşlangıçTarihi,BitişTarihi,parabirimi)
-                           DAL
-                            --- List<CurrencyInfo> currentDal.GetList();
-                            WEb servistn çek               
+/*
+
+               BLL
+               public  List<KurListesiDTO> GetServisKurListesi(BaşlangıçTarihi,BitişTarihi,parabirimi)
+                          DAL
+                           --- List<CurrencyInfo> currentDal.GetList();
+                           WEb servistn çek               
 
 
-           List<KurListesiDTO> records=  _currencyService.GetGüncelKurListesi();
-                        _currencyService.UpdateKurlar(records)
+          List<KurListesiDTO> records=  _currencyService.GetGüncelKurListesi();
+                       _currencyService.UpdateKurlar(records)
 
-             */
+            */
 /*dropdown
  parabirimi alış satış
 usd         23 234

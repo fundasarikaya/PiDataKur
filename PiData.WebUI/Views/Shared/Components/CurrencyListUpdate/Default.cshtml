@@ -1,5 +1,5 @@
 ﻿
-@model PiData.WebUI.Business.Common.CurrencyListDTO
+@model List<PiData.Business.Common.ExchangeListDTO>
 
 <table class="table table-bordered">
     <thead>
@@ -10,7 +10,7 @@
         </tr>
     </thead>
     <tbody>
-        @*@foreach (var item in Model.currencyLists)
+        @foreach (var item in Model)
         {
             <tr>
                 <td>@item.Date</td>
@@ -18,7 +18,7 @@
                 <td>@item.ForexBuying</td>
             </tr>
 
-        }*@
+        }
     </tbody>
 </table>
 
