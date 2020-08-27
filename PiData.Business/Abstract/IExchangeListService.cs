@@ -11,5 +11,6 @@ namespace PiData.Business.Abstract
         List<ExchangeListDTO> GetServiceExchangeList(string startDate,string endDate,string currency);
         List<ExchangeListDTO> GetExchangeGraphicList(string startDate, string endDate, string currency);
         List<ExchangeListDTO> GetCurrencyRateList(string currency);
+        decimal GetCurrencyRateSelling(string curreny);
     }
 }

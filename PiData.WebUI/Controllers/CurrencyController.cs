@@ -91,6 +91,20 @@ namespace PiData.WebUI.Controllers
 
         #endregion
         #region Alış Satış Hesaplama 
+        public ActionResult CurrencyCalculate()
+        {
+            ExchangeListDTO exchangeList = new ExchangeListDTO
+            {
+                Currencies = _currencyService.GetAll(),
+            };
+            return View(exchangeList);
+        }
+       
+        public decimal GetForexSelling(string currency)
+        {
+            decimal sonuc = _exchangeListService.GetCurrencyRateSelling(currency);
+            return sonuc;
+        }
         #endregion
         #region Grafik ekran
         public IActionResult Graphic()

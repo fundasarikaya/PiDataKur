@@ -6,4 +6,3 @@ C:\Users\funda\Desktop\PiData.Proje\PiData.Core\obj\Debug\netcoreapp3.1\PiData.C
 C:\Users\funda\Desktop\PiData.Proje\PiData.Core\obj\Debug\netcoreapp3.1\PiData.Core.csproj.CoreCompileInputs.cache
 C:\Users\funda\Desktop\PiData.Proje\PiData.Core\obj\Debug\netcoreapp3.1\PiData.Core.dll
 C:\Users\funda\Desktop\PiData.Proje\PiData.Core\obj\Debug\netcoreapp3.1\PiData.Core.pdb
-C:\Users\funda\Desktop\PiData.Proje\PiData.Core\obj\Debug\netcoreapp3.1\PiData.Core.csprojAssemblyReference.cache

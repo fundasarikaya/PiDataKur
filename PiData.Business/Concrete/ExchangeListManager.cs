@@ -23,7 +23,7 @@ namespace PiData.Business.Concrete
             _mapper = mapper;
             _currencyDal = currencyDal;
         }
-
+        #region güncel kur listesi
         public List<ExchangeListDTO> GetCurrencyRateList(string currency)
         {
             List<CurrencyInfo> currencies = _currencyDal.GetList();
@@ -80,7 +80,8 @@ namespace PiData.Business.Concrete
 
             return records;
         }
-
+        #endregion
+        #region kur listesi güncelleme
         public List<ExchangeListDTO> GetServiceExchangeList(string startDate, string endDate, string currency)
         {
             List<CurrencyInfo> currencies = _currencyDal.GetList();
@@ -166,7 +167,8 @@ namespace PiData.Business.Concrete
 
             return records;
         }
-
+        #endregion
+        #region grafik
         public List<ExchangeListDTO> GetExchangeGraphicList(string startDate, string endDate, string currency)
         {
             List<CurrencyInfo> currencies = _currencyDal.GetList();
@@ -230,6 +232,29 @@ namespace PiData.Business.Concrete
             }
 
             return records;
+        }
+        #endregion
+
+        public decimal GetCurrencyRateSelling(string currency)
+        {
+            string birim=$"TP.DK.{currency}.S";
+            WebClient client = new WebClient();
+            var url = $"https://evds2.tcmb.gov.tr/service/evds/series=" + birim + "&startDate=" + DateTime.Now.ToString("dd-MM-yyyy") + "&endDate=" + DateTime.Now.ToString("dd-MM-yyyy") + "&type=json&key=mDCZlAC7EA";
+            var jsonData = client.DownloadString(url);
+            var currencyjson = JsonConvert.DeserializeObject<dynamic>(jsonData);
+
+            decimal sonuc = 0;
+            if (currency != null)
+            {
+                foreach (var item in currencyjson.items)
+                {
+                    decimal Satis = item[$"TP_DK_{currency}_S"];
+                    decimal ForexSelling = 0;
+                    if (!Satis.Equals(null) && decimal.TryParse(Satis.ToString(), out ForexSelling))
+                        sonuc = ForexSelling;
+                }
+            }
+            return sonuc;
         }
     }
 }

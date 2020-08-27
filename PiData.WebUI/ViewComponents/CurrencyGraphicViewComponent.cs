@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PiData.WebUI.ViewComponents
 {
-    public class CurrencyGraphicViewComponent:ViewComponent
+    public class CurrencyGraphicViewComponent : ViewComponent
     {
         private ICurrencyService _currencyService;
         private IExchangeListService _exchangeListService;
@@ -21,6 +21,7 @@ namespace PiData.WebUI.ViewComponents
         public ViewViewComponentResult Invoke(string startDate, string endDate, string currency)
         {
             List<ExchangeListDTO> exchangeLists = _exchangeListService.GetExchangeGraphicList(startDate, endDate, currency);//Kur bilgileri güncelleme ekranı 
+          
             return View(exchangeLists.ToList());
         }
     }

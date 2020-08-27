@@ -17,5 +17,6 @@ namespace PiData.Business.Common
         public string endDate { get; set; }
         public List<CurrencyDTO> Currencies { get; set; }
         public List<ExchangeListDTO> ExchangeLists { get; set; }
+
     }
 }

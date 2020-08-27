@@ -94,4 +94,5 @@ C:\Users\funda\Desktop\PiData.Proje\PiData.WebUI\obj\Debug\netcoreapp3.1\Razor\V
 C:\Users\funda\Desktop\PiData.Proje\PiData.WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Currency\CurrencyRateList.cshtml.g.cs
 C:\Users\funda\Desktop\PiData.Proje\PiData.WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\CurrencyRateList\Default.cshtml.g.cs
 C:\Users\funda\Desktop\PiData.Proje\PiData.WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Currency\Graphic.cshtml.g.cs
-C:\Users\funda\Desktop\PiData.Proje\PiData.WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\CurrencyGraphic\Defatult.cshtml.g.cs
+C:\Users\funda\Desktop\PiData.Proje\PiData.WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\CurrencyGraphic\Default.cshtml.g.cs
+C:\Users\funda\Desktop\PiData.Proje\PiData.WebUI\obj\Debug\netcoreapp3.1\Razor\Views\Currency\CurrencyCalculate.cshtml.g.cs

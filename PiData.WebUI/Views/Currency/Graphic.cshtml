@@ -59,20 +59,30 @@
                     </div>
 
                 </div>
-                <div  id="CurrencyGraphic">
-
-                </div>
+                
             </div>
 
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-info">
+                <div class="box-body">
+                    <div id="CurrencyGraphicField">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </section>
 
-<script src="../Content/Layout/js/jquery.min.js"></script>
+@*<script src="../Content/Layout/js/jquery.min.js"></script>*@
 <script>
     $(document).ready(function () {
         $('#Grafik').click(function () {
-            $("#CurrencyGraphic").empty();
+            $("#CurrencyGraphicField").empty();
             var url = '@Url.Action("GetGraphics", "Currency")';
             var baslangicTarihi = $('.datepicker').val();
             var bitisTarihi = $('.datepicker2').val();
@@ -83,8 +93,7 @@
                 url: url,
                 data: { startDate: baslangicTarihi, endDate: bitisTarihi, currency: CurrencyName },
                 success: function (result) {
-                    console.log(result);
-                    $("#CurrencyGraphic").html(result);
+                    $("#CurrencyGraphicField").html(result);
                 },
             });
         })
@@ -92,62 +101,3 @@
 </script>
 
 
-
-
-@*<script>
-        var jsonData = $.ajax({
-            url: '/Home/GetSiparisChart',
-            dataType: 'json',
-        }).done(function (results) {
-            var plabels = [], data = [];
-            results["data"].forEach(function (packet) {
-                plabels.push(packet.cAy);
-                data.push(parseFloat(packet.nAylikSiparisSayisi));
-            });
-
-            $(function () {
-                var areaChartData = {
-                    labels: plabels,
-                    datasets: [
-                        {
-                            label: 'SiparisSayisi',
-                            fillColor: 'rgb(221, 75, 57)',
-                            strokeColor: 'rgb(221, 75, 57)',
-                            pointColor: 'rgb(221, 75, 57)',
-                            pointStrokeColor: '#c1c7d1',
-                            pointHighlightFill: '#fff',
-                            pointHighlightStroke: 'rgb(221, 75, 57)',
-                            data: data
-                        }
-                    ]
-                }
-                //- BAR CHART -
-                var barChartCanvas = $('#barChart').get(0).getContext('2d')
-                var barChart = new Chart(barChartCanvas)
-                var barChartData = areaChartData
-                barChartData.datasets[0].fillColor = '#dd4b39'
-                barChartData.datasets[0].strokeColor = '#dd4b39'
-                barChartData.datasets[0].pointColor = '#dd4b39'
-                var barChartOptions = {
-                    scaleBeginAtZero: true,
-                    showLabels: true,
-                    scaleShowGridLines: true,
-                    scaleGridLineColor: 'rgba(0,0,0,.05)',
-                    scaleGridLineWidth: 1,
-                    scaleShowHorizontalLines: true,
-                    scaleShowVerticalLines: true,
-                    barShowStroke: true,
-                    barStrokeWidth: 2,
-                    barValueSpacing: 5,
-                    barDatasetSpacing: 1,
-                    legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].fillColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',
-                    responsive: true,
-                    maintainAspectRatio: true
-                }
-
-                barChartOptions.datasetFill = false
-                barChart.Bar(barChartData, barChartOptions)
-            });
-        });
-
-    </script>*@
